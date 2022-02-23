@@ -5,13 +5,15 @@ interface Employee {
     val name: String
     val age: Int
 
-
     fun employeeInfo() =
-        "Information about person".prettyPrint()
+        println(toStringPretty("Information about person"))
+
     fun work()
-    fun String.prettyPrint() {
-        println("position: $position name: $name")
-        println(this)
-        println()
+
+    fun toStringPretty(text: String): String {
+        var textPretty: String = ""
+        textPretty += "position: $position name: $name\n"
+        textPretty += text + "\n"
+        return textPretty
     }
 }

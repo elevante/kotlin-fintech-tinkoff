@@ -13,19 +13,24 @@ class Programmer(
     fun performs(topic: String, conferenceName: String) =
         println(
             "Programmer $name speaks on the " +
-                    "topic:$topic at $conferenceName conference"
+                "topic:$topic at $conferenceName conference"
         )
 
+    fun getWorkIdInfo() =
+        workIdInfo
 
-    fun getWorkIdInfo(): Int = workIdInfo
-    fun getEmail(): String = email
+    fun getEmail() =
+        email
 
-    fun teamLeading() = println("Manages the team")
-    override fun work(): Unit = "Сoding a million dollar program".prettyPrint()
+    fun teamLeading() =
+        println("Manages the team")
+
+    override fun work() =
+        println(toStringPretty("Сoding a million dollar program"))
+
     override fun toString(): String {
         return "position ='" + position + '\'' +
-                ", name = " + name +
-                '}'
+            ", name = " + name +
+            '}'
     }
 }
-

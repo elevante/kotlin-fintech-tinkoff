@@ -5,11 +5,16 @@ import ru.tinkoff.fintech.lesson_1.employees.Manager
 import ru.tinkoff.fintech.lesson_1.employees.Programmer
 
 fun main() {
-    val programmer = Programmer("Kotlin developer", "Jhon", 24, 353543, "jlock@tinkoff.ru")
-    val manager = Manager("Project manager", "Mark", 30, "nlktech", "Megaton.ru")
+    val programmer =
+        Programmer("Kotlin developer", "Jhon", 24, 353543, "jlock@tinkoff.ru")
 
-    val employees = listOf(programmer, manager)
-    employees.forEach{
+    val manager =
+        Manager("Project manager", "Mark", 30, "nlktech", "Megafon.ru")
+
+    val employees =
+        listOf(programmer, manager)
+
+    employees.forEach {
         it.work()
         println()
     }
@@ -18,5 +23,4 @@ fun main() {
     manager.negotiation()
     val director = Director(manager, programmer)
     director.meeting()
-
 }
