@@ -1,4 +1,5 @@
-
+.gradle
+.idea
 # Created by https://www.toptal.com/developers/gitignore/api/gradle,kotlin,java,intellij+iml
 # Edit at https://www.toptal.com/developers/gitignore?templates=gradle,kotlin,java,intellij+iml
 
@@ -149,4 +150,3 @@ gradle-app.setting
 .classpath
 
 # End of https://www.toptal.com/developers/gitignore/api/gradle,kotlin,java,intellij+iml
-.editorconfig
