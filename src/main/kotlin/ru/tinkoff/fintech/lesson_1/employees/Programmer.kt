@@ -7,26 +7,20 @@ class Programmer(
     private var workIdInfo: Int,
     private var email: String
 ) : Employee {
-    fun performs(topic: String) =
-        println("Programmer $name speaks on the topic:$topic")
+    fun performs(topic: String) = println("Programmer $name speaks on the topic:$topic")
 
-    fun performs(topic: String, conferenceName: String) =
-        println(
-            "Programmer $name speaks on the " +
-                "topic:$topic at $conferenceName conference"
-        )
+    fun performs(topic: String, conferenceName: String) = println(
+        "Programmer $name speaks on the " +
+            "topic:$topic at $conferenceName conference"
+    )
 
-    fun getWorkIdInfo() =
-        workIdInfo
+    fun getWorkIdInfo() = workIdInfo
 
-    fun getEmail() =
-        email
+    fun getEmail() = email
 
-    fun teamLeading() =
-        println("Manages the team")
+    fun teamLeading() = println("Manages the team")
 
-    override fun work() =
-        println(toStringPretty("Сoding a million dollar program"))
+    override fun work() = println(toStringPretty("Сoding a million dollar program"))
 
     override fun toString(): String {
         return "position ='" + position + '\'' +

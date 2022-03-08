@@ -5,6 +5,5 @@ class Director(
     var programmer: Programmer,
     private val name: String = "Rick"
 ) {
-    fun meeting() =
-        println("$name called staff to a meeting $manager $programmer")
+    fun meeting() = println("$name called staff to a meeting $manager $programmer")
 }
