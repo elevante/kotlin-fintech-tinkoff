@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation(kotlin("stdlib"))
+    testImplementation(kotlin("test"))
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.0")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.8.0")
@@ -22,8 +22,11 @@ dependencies {
 
 }
 
-tasks {
-    test {
-        useJUnitPlatform()
-    }
+
+tasks.test {
+    useJUnit()
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>() {
+    kotlinOptions.jvmTarget = "1.8"
 }
