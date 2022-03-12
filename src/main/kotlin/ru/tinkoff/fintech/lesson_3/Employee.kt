@@ -2,7 +2,6 @@ package ru.tinkoff.fintech.lesson_3
 
 abstract class Employee(
     val name: String,
-    val workIdInfo: Int,
     var workHours: Int,
 ) {
 
@@ -34,10 +33,9 @@ class TeamLeader(private val employee: Employee) {
 class QaEngineer(
     name: String,
     workHours: Int,
-    workIdInfo: Int,
     private var businessAnalyst: String,
     private var nameCustomer: String
-) : Employee(name, workHours, workIdInfo) {
+) : Employee(name, workHours) {
 
     override fun writePetition() {
         workHours -= 2
@@ -59,8 +57,7 @@ class QaEngineer(
 class SoftwareDeveloper(
     name: String,
     workHours: Int,
-    workIdInfo: Int,
-) : Employee(name, workHours, workIdInfo) {
+) : Employee(name, workHours) {
 
     fun performs(topic: String) = println("Programmer $name speaks on the topic:$topic")
 
@@ -85,8 +82,8 @@ class SoftwareDeveloper(
 
 fun main() {
     /***1***/
-    val softwareDeveloper = SoftwareDeveloper("Mark", 8, 2311313)
-    val qaEngineer = QaEngineer("Lee", 8, 24234234, "Leen Tee", "Megafon")
+    val softwareDeveloper = SoftwareDeveloper("Mark", 8)
+    val qaEngineer = QaEngineer("Lee", 8,  "Leen Tee", "Megafon")
     val employees = listOf(softwareDeveloper, qaEngineer)
     employees.forEach {
         it.work()

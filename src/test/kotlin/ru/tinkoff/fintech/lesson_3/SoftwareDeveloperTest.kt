@@ -8,7 +8,7 @@ class SoftwareDeveloperTest {
     @Test
     fun `if it works, then working hours are reduced`() {
         //given
-        val softwareDeveloper = SoftwareDeveloper("Mark", 8, 2311313)
+        val softwareDeveloper = SoftwareDeveloper("Mark", 8)
 
         //when
         softwareDeveloper.work()
@@ -20,7 +20,7 @@ class SoftwareDeveloperTest {
     @Test
     fun `if the working day is over, then a new day begins`() {
         //given
-        val softwareDeveloper = SoftwareDeveloper("Mark", 8, 2311313)
+        val softwareDeveloper = SoftwareDeveloper("Mark", 1)
 
         //when
         softwareDeveloper.work()
