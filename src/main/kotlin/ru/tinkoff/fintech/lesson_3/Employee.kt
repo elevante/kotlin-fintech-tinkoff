@@ -1,116 +1,103 @@
 package ru.tinkoff.fintech.lesson_3
 
-interface Employee {
-    val position: String
-    val name: String
-    val age: Int
-    val workHours: Int
+abstract class Employee(
+    val name: String,
+    val workIdInfo: Int,
+    var workHours: Int,
+) {
 
-    fun employeeInfo() = println(toStringPretty("Information about person"))
+    abstract fun work()
 
-    fun work()
+    abstract fun writePetition()
+
+    protected fun nextDay() {
+        workHours = 8
+    }
+
+    fun getHours() = workHours
 
 
-    fun nextDay()
-
-    fun toStringPretty(text: String): String {
+    private fun toStringPretty(text: String): String {
         var textPretty = ""
-        textPretty += "position: $position name: $name\n"
+        textPretty += "name: $name\n"
         textPretty += text + "\n"
         return textPretty
     }
 }
 
-class HeadMaster(
-    var projectManager: ProjectManager,
-    var softwareDeveloper: SoftwareDeveloper,
-    private val name: String = "Rick"
-) {
-    fun meeting() = println("$name called staff to a meeting $projectManager $softwareDeveloper")
+
+class TeamLeader(private val employee: Employee) {
+    fun giveTask() = employee.work()
+    fun trashTalk() = employee.writePetition()
 }
 
-class ProjectManager(
-    override var workHours: Int,
-    override val position: String,
-    override val name: String,
-    override val age: Int,
-    private var nameProject: String,
+class QaEngineer(
+    name: String,
+    workHours: Int,
+    workIdInfo: Int,
+    private var businessAnalyst: String,
     private var nameCustomer: String
-) : Employee {
+) : Employee(name, workHours, workIdInfo) {
 
-    fun negotiation() = println("Communicates with the client: $nameCustomer of the project: $nameProject")
-
-    override fun work() = println(
-        toStringPretty(
-            "Management, including the process of planning, " +
-                "organizing, motivating and controlling"
-        )
-    )
-
-    override fun nextDay() {
+    override fun writePetition() {
+        workHours -= 2
+        println("$name is writing a petition")
     }
 
-    override fun toString(): String {
-        return "position ='" + position + '\'' +
-            ", name = " + name +
-            '}'
+    override fun work() {
+        workHours -= 1
+        println("$name is testing")
+        if (workHours == 0) nextDay()
     }
+
+
+    fun negotiation() = println("Communicates with the client: $nameCustomer"
+        + " and business analyst: $businessAnalyst and testing program\n")
+
 }
 
 class SoftwareDeveloper(
-    override val position: String,
-    override val name: String,
-    override val age: Int,
-    override var workHours: Int,
-    private var workIdInfo: Int,
-    private var email: String
-) : Employee {
+    name: String,
+    workHours: Int,
+    workIdInfo: Int,
+) : Employee(name, workHours, workIdInfo) {
+
     fun performs(topic: String) = println("Programmer $name speaks on the topic:$topic")
 
-    fun performs(topic: String, conferenceName: String) = println(
-        "Programmer $name speaks on the " +
-            "topic:$topic at $conferenceName conference"
-    )
+    fun performs(topic: String, conferenceName: String) = println("Programmer $name speaks on "
+        + "the topic:$topic at $conferenceName conference")
 
-    fun getHours() = workHours
-//    fun getWorkIdInfo() = workIdInfo
+    fun designs() {
+        println("Designs architecture")
+    }
 
-    fun getEmail() = email
-
-    fun teamLeading() = println("Manages the team")
+    override fun writePetition() {
+        workHours -= 2
+        println("$name is writing a petition\n")
+    }
 
     override fun work() {
         workHours -= 1
         println("$name is coding")
-        if(workHours == 0) nextDay()
-    }
-
-
-    override fun nextDay() {
-        workHours = 8
-    }
-
-    override fun toString(): String {
-        return "position ='" + position + '\'' +
-            ", name = " + name +
-            '}'
+        if (workHours == 0) nextDay()
     }
 }
 
 fun main() {
-    val softwareDeveloper = SoftwareDeveloper("Kotlin developer", "Jhon", 24, 8,353543, "jlock@tinkoff.ru")
-
-    val projectManager = ProjectManager(8,"Project manager", "Mark", 30, "nlktech", "Megafon.ru")
-
-    val employees = listOf(softwareDeveloper, projectManager)
-
+    /***1***/
+    val softwareDeveloper = SoftwareDeveloper("Mark", 8, 2311313)
+    val qaEngineer = QaEngineer("Lee", 8, 24234234, "Leen Tee", "Megafon")
+    val employees = listOf(softwareDeveloper, qaEngineer)
     employees.forEach {
         it.work()
         println()
     }
+    softwareDeveloper.designs()
+    qaEngineer.negotiation()
 
-    softwareDeveloper.teamLeading()
-    projectManager.negotiation()
-    val headMaster = HeadMaster(projectManager, softwareDeveloper)
-    headMaster.meeting()
+    /***2***/
+    val frontedLeader = TeamLeader(qaEngineer)
+    val backendLeader = TeamLeader(softwareDeveloper)
+    frontedLeader.giveTask()
+    backendLeader.trashTalk()
 }
