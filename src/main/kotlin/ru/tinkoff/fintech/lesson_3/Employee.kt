@@ -4,10 +4,14 @@ interface Employee {
     val position: String
     val name: String
     val age: Int
+    val workHours: Int
 
     fun employeeInfo() = println(toStringPretty("Information about person"))
 
     fun work()
+
+
+    fun nextDay()
 
     fun toStringPretty(text: String): String {
         var textPretty = ""
@@ -26,6 +30,7 @@ class HeadMaster(
 }
 
 class ProjectManager(
+    override var workHours: Int,
     override val position: String,
     override val name: String,
     override val age: Int,
@@ -42,6 +47,9 @@ class ProjectManager(
         )
     )
 
+    override fun nextDay() {
+    }
+
     override fun toString(): String {
         return "position ='" + position + '\'' +
             ", name = " + name +
@@ -53,6 +61,7 @@ class SoftwareDeveloper(
     override val position: String,
     override val name: String,
     override val age: Int,
+    override var workHours: Int,
     private var workIdInfo: Int,
     private var email: String
 ) : Employee {
@@ -63,13 +72,23 @@ class SoftwareDeveloper(
             "topic:$topic at $conferenceName conference"
     )
 
-    fun getWorkIdInfo() = workIdInfo
+    fun getHours() = workHours
+//    fun getWorkIdInfo() = workIdInfo
 
     fun getEmail() = email
 
     fun teamLeading() = println("Manages the team")
 
-    override fun work() = println(toStringPretty("Сoding a million dollar program"))
+    override fun work() {
+        workHours -= 1
+        println("$name is coding")
+        if(workHours == 0) nextDay()
+    }
+
+
+    override fun nextDay() {
+        workHours = 8
+    }
 
     override fun toString(): String {
         return "position ='" + position + '\'' +
@@ -79,9 +98,9 @@ class SoftwareDeveloper(
 }
 
 fun main() {
-    val softwareDeveloper = SoftwareDeveloper("Kotlin developer", "Jhon", 24, 353543, "jlock@tinkoff.ru")
+    val softwareDeveloper = SoftwareDeveloper("Kotlin developer", "Jhon", 24, 8,353543, "jlock@tinkoff.ru")
 
-    val projectManager = ProjectManager("Project manager", "Mark", 30, "nlktech", "Megafon.ru")
+    val projectManager = ProjectManager(8,"Project manager", "Mark", 30, "nlktech", "Megafon.ru")
 
     val employees = listOf(softwareDeveloper, projectManager)
 
